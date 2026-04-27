@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>popArrayDB | Dataset Discovery</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="datasets">
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>popArrayDB</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-title">
+      <h1>Dataset Discovery</h1>
+      <p>Browse and explore population genomic datasets from public Illumina array data sources.</p>
+    </section>
+    <section class="search-line">
+      <input id="datasetSearch" class="input" placeholder="Search by keywords, species, tissue, or accession...">
+      <select id="datasetFilter">
+        <option>All</option>
+        <option>NCBI GEO</option>
+        <option>NCBI SRA</option>
+        <option>ArrayExpress</option>
+        <option>SNP Genotyping</option>
+        <option>Methylation Array</option>
+        <option>Expression Array</option>
+        <option>Gene Expression</option>
+      </select>
+    </section>
+    <p id="resultCount" class="muted"></p>
+    <section id="datasetList" class="dataset-list"></section>
+  </main>
+
+  <footer class="footer">popArrayDB mock UI demo • Dataset search uses local mock data only</footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>popArrayDB | Home</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>popArrayDB</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="badge badge-blue">Population Genomics Platform</span>
+        <h1>Discover, Analyze, and Export Population Genomic Datasets</h1>
+        <p>Access curated Illumina array data from NCBI GEO, SRA, and ArrayExpress. Explore genetic diversity across human populations worldwide.</p>
+        <form id="homeSearchForm" class="hero-search">
+          <input id="homeSearchInput" placeholder="Search by species, tissue, phenotype, or accession...">
+          <button class="btn btn-dark" type="submit">Search</button>
+        </form>
+        <div class="quick-tags"><span>Quick search:</span><span>Homo sapiens</span><span>European populations</span><span>Methylation</span></div>
+      </div>
+      <div class="lab-card"><div class="lab-title">Research Lab Dataset Preview</div></div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section">
+      <div class="container grid grid-4">
+        <div class="card stat-card"><div class="stat-icon">▤</div><div><div class="stat-number">2,847</div><div class="stat-label">Datasets</div></div></div>
+        <div class="card stat-card"><div class="stat-icon">👥</div><div><div class="stat-number">1.2M+</div><div class="stat-label">Samples</div></div></div>
+        <div class="card stat-card"><div class="stat-icon">◉</div><div><div class="stat-number">145</div><div class="stat-label">Populations</div></div></div>
+        <div class="card stat-card"><div class="stat-icon">✦</div><div><div class="stat-number">850K+</div><div class="stat-label">SNPs</div></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading"><h2>Platform Features</h2><p>Comprehensive tools for discovering and analyzing population genomic data</p></div>
+        <div class="grid grid-3">
+          <article class="card feature-card"><div class="feature-icon">⌕</div><h3>Advanced Search</h3><p>Search datasets by species, tissue, phenotype, geography, or accession numbers.</p></article>
+          <article class="card feature-card"><div class="feature-icon">⇄</div><h3>Data Integration</h3><p>Automatically links GEO entries to SRA files and ArrayExpress studies for raw data repositories.</p></article>
+          <article class="card feature-card"><div class="feature-icon">↗</div><h3>Export & Analyze</h3><p>Download standardized datasets for downstream population genetic analysis and visualization.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="featured-header">
+          <div><h2>Featured Datasets</h2><p class="muted">Recently published population genomic studies</p></div>
+          <a class="btn btn-dark" href="datasets.html">Browse All →</a>
+        </div>
+        <div id="featuredDatasets" class="grid grid-2"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container center">
+        <h2>Integrated Data Sources</h2>
+        <p class="muted">popArrayDB aggregates and normalizes data from trusted public repositories</p><br>
+        <div class="source-row">
+          <div><strong>NCBI GEO</strong><span>Gene Expression Omnibus</span></div>
+          <div><strong>NCBI SRA</strong><span>Sequence Read Archive</span></div>
+          <div><strong>ArrayExpress</strong><span>EBI Archive</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">popArrayDB mock UI demo • No real API or database connected</footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

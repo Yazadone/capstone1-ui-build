@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>popArrayDB | Exports</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="exports">
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>popArrayDB</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-title">
+      <h1>Export History</h1>
+      <p>Mock list of exported files from analyses and dataset downloads.</p>
+    </section>
+
+    <section class="card table-wrap">
+      <table class="table">
+        <thead>
+          <tr><th>File</th><th>Dataset</th><th>Analysis</th><th>Format</th><th>Exported</th><th>Action</th></tr>
+        </thead>
+        <tbody id="exportTableBody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer">popArrayDB mock UI demo • Download buttons are clickable demo actions</footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

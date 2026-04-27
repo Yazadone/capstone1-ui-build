@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>popArrayDB | Dataset Detail</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="detail">
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>popArrayDB</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-title">
+      <a class="link" href="datasets.html">← Back to Dataset Discovery</a>
+    </section>
+    <section id="detailArea"></section>
+  </main>
+
+  <div id="requestModal" class="modal-bg">
+    <div class="modal">
+      <h2>Request Dataset Access</h2>
+      <p>You are requesting access to: <strong id="modalDatasetTitle">Dataset</strong></p>
+      <form id="requestForm">
+        <input type="hidden" id="requestDatasetId">
+        <label>Reason for Access</label>
+        <textarea required>I need access to this dataset for class research and population genomics analysis.</textarea>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" onclick="closeRequestModal()">Cancel</button>
+          <button type="submit" class="btn btn-dark">Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">popArrayDB mock UI demo • Request button only creates a demo message</footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

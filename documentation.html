@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>popArrayDB | Documentation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="documentation">
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>popArrayDB</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-title">
+      <h1>Documentation</h1>
+      <p>Simple class-demo documentation for how popArrayDB would work.</p>
+    </section>
+    <section class="grid grid-3">
+      <article class="card feature-card"><div class="feature-icon">1</div><h3>Search Datasets</h3><p>Researchers can search by accession, organism, population, region, source database, platform, or dataset type.</p><br><a class="btn btn-dark" href="datasets.html">Try Search</a></article>
+      <article class="card feature-card"><div class="feature-icon">2</div><h3>Request Access</h3><p>Controlled datasets can have pending, approved, denied, or follow-up statuses. This demo shows the review workflow only.</p><br><a class="btn btn-dark" href="access-requests.html">View Requests</a></article>
+      <article class="card feature-card"><div class="feature-icon">3</div><h3>Analyze & Export</h3><p>Users can run mock analysis views and export history screens. No real files are created in this class demo.</p><br><a class="btn btn-dark" href="analyses.html">View Analyses</a></article>
+    </section>
+
+    <section class="card card-pad" style="margin-top:24px">
+      <h2>Data Model Used in Demo</h2>
+      <p class="muted">This interface is based on the project model: Registration, Users, Login Accounts, Status Types, HIPAA Authorization, Datasets, NCBI Records, Access Requests, Follow Up, Analyses, and Export History.</p>
+      <div class="grid grid-4">
+        <span class="badge badge-blue">REGISTRATION</span>
+        <span class="badge badge-blue">USERS</span>
+        <span class="badge badge-blue">DATASETS</span>
+        <span class="badge badge-blue">NCBI_RECORDS</span>
+        <span class="badge badge-purple">ACCESS_REQUESTS</span>
+        <span class="badge badge-purple">ANALYSES</span>
+        <span class="badge badge-purple">EXPORT_HISTORY</span>
+        <span class="badge badge-green">STATUS_TYPES</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">popArrayDB mock UI demo • Documentation page is static HTML</footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
