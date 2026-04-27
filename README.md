@@ -1,6 +1,6 @@
-# meFST - HTML/CSS/JavaScript UI Demo
+# meFST - UI prototype 
 
-This folder contains a simple class demo UI for meFST.
+This folder contains the prototype UI for meFST.
 
 It uses:
 
