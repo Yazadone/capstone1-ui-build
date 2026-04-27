@@ -89,27 +89,27 @@ const ncbiRecords = [
 ];
 
 const requests = [
-  { id: 801, user: 'Dr. Maya Jackson', datasetId: 1, dataset: 'European Homo sapiens analysis', reason: 'Need genotype data for population structure comparison.', status: 'Pending', autoApproved: false, reviewedBy: '-', requestedAt: '2026-04-21', reviewedAt: '-' },
-  { id: 802, user: 'Yacine Hamadou', datasetId: 3, dataset: 'African genetic diversity', reason: 'Class demo and visualization testing.', status: 'Approved', autoApproved: true, reviewedBy: 'Admin', requestedAt: '2026-04-18', reviewedAt: '2026-04-18' },
-  { id: 803, user: 'Chris Tolis', datasetId: 2, dataset: 'Asian methylation arrays', reason: 'Missing institution verification.', status: 'Follow Up', autoApproved: false, reviewedBy: 'Admin', requestedAt: '2026-04-15', reviewedAt: '2026-04-16' },
-  { id: 804, user: 'Christopher Pascucci', datasetId: 4, dataset: 'Latin American expression profile', reason: 'Needs controlled access for research methods review.', status: 'Denied', autoApproved: false, reviewedBy: 'Admin', requestedAt: '2026-04-11', reviewedAt: '2026-04-12' }
+  { id: 801, user: 'Demo Researcher D', datasetId: 1, dataset: 'European Homo sapiens analysis', reason: 'Need genotype data for population structure comparison.', status: 'Pending', autoApproved: false, reviewedBy: '-', requestedAt: '2026-04-21', reviewedAt: '-' },
+  { id: 802, user: 'Demo Researcher A', datasetId: 3, dataset: 'African genetic diversity', reason: 'Class demo and visualization testing.', status: 'Approved', autoApproved: true, reviewedBy: 'Admin', requestedAt: '2026-04-18', reviewedAt: '2026-04-18' },
+  { id: 803, user: 'Demo Reviewer B', datasetId: 2, dataset: 'Asian methylation arrays', reason: 'Missing institution verification.', status: 'Follow Up', autoApproved: false, reviewedBy: 'Admin', requestedAt: '2026-04-15', reviewedAt: '2026-04-16' },
+  { id: 804, user: 'Demo Faculty C', datasetId: 4, dataset: 'Latin American expression profile', reason: 'Needs controlled access for research methods review.', status: 'Denied', autoApproved: false, reviewedBy: 'Admin', requestedAt: '2026-04-11', reviewedAt: '2026-04-12' }
 ];
 
 const analyses = [
-  { id: 501, datasetId: 1, dataset: 'European Homo sapiens analysis', user: 'Yacine Hamadou', type: 'Population PCA', filters: 'Population: European; Markers: common SNPs; Missingness < 5%', summary: 'The first two principal components separate Northern, Central, and Southern European sample groups.', createdAt: '2026-04-20', status: 'Completed' },
-  { id: 502, datasetId: 3, dataset: 'African genetic diversity', user: 'Dr. Maya Jackson', type: 'Admixture Summary', filters: 'Region: Sub-Saharan Africa; Sample quality: high', summary: 'Mock analysis shows multiple population clusters with strong regional structure.', createdAt: '2026-04-22', status: 'Running' },
-  { id: 503, datasetId: 2, dataset: 'Asian methylation arrays', user: 'Chris Tolis', type: 'Methylation Heatmap', filters: 'Tissue: PBMC; Platform: EPIC', summary: 'Differential methylation patterns are grouped by population label in the demo results.', createdAt: '2026-04-23', status: 'Completed' }
+  { id: 501, datasetId: 1, dataset: 'European Homo sapiens analysis', user: 'Demo Researcher A', type: 'Population PCA', filters: 'Population: European; Markers: common SNPs; Missingness < 5%', summary: 'The first two principal components separate Northern, Central, and Southern European sample groups.', createdAt: '2026-04-20', status: 'Completed' },
+  { id: 502, datasetId: 3, dataset: 'African genetic diversity', user: 'Demo Researcher D', type: 'Admixture Summary', filters: 'Region: Sub-Saharan Africa; Sample quality: high', summary: 'Mock analysis shows multiple population clusters with strong regional structure.', createdAt: '2026-04-22', status: 'Running' },
+  { id: 503, datasetId: 2, dataset: 'Asian methylation arrays', user: 'Demo Reviewer B', type: 'Methylation Heatmap', filters: 'Tissue: PBMC; Platform: EPIC', summary: 'Differential methylation patterns are grouped by population label in the demo results.', createdAt: '2026-04-23', status: 'Completed' }
 ];
 
 const exportsHistory = [
-  { id: 1, user: 'Yacine Hamadou', analysis: 'Population PCA', dataset: 'European Homo sapiens analysis', format: 'CSV', file: 'european_pca_results.csv', exportedAt: '2026-04-20' },
-  { id: 2, user: 'Dr. Maya Jackson', analysis: 'Admixture Summary', dataset: 'African genetic diversity', format: 'PDF', file: 'african_admixture_summary.pdf', exportedAt: '2026-04-22' },
-  { id: 3, user: 'Chris Tolis', analysis: 'Methylation Heatmap', dataset: 'Asian methylation arrays', format: 'PNG', file: 'methylation_heatmap.png', exportedAt: '2026-04-23' }
+  { id: 1, user: 'Demo Researcher A', analysis: 'Population PCA', dataset: 'European Homo sapiens analysis', format: 'CSV', file: 'european_pca_results.csv', exportedAt: '2026-04-20' },
+  { id: 2, user: 'Demo Researcher D', analysis: 'Admixture Summary', dataset: 'African genetic diversity', format: 'PDF', file: 'african_admixture_summary.pdf', exportedAt: '2026-04-22' },
+  { id: 3, user: 'Demo Reviewer B', analysis: 'Methylation Heatmap', dataset: 'Asian methylation arrays', format: 'PNG', file: 'methylation_heatmap.png', exportedAt: '2026-04-23' }
 ];
 
 const users = [
-  { id: 1, name: 'Yacine Hamadou', email: 'yacine@university.edu', role: 'Researcher', status: 'Active', createdAt: '2026-04-01' },
-  { id: 2, name: 'Dr. Maya Jackson', email: 'mjackson@university.edu', role: 'Researcher', status: 'Active', createdAt: '2026-04-05' },
-  { id: 3, name: 'Chris Tolis', email: 'ct@temple.edu', role: 'Reviewer', status: 'Pending', createdAt: '2026-04-10' },
-  { id: 4, name: 'Admin User', email: 'admin@poparraydb.edu', role: 'Admin', status: 'Active', createdAt: '2026-03-15' }
+  { id: 1, name: 'Demo Researcher A', email: 'researcher.a@example.edu', role: 'Researcher', status: 'Active', createdAt: '2026-04-01' },
+  { id: 2, name: 'Demo Researcher D', email: 'researcher.d@example.edu', role: 'Researcher', status: 'Active', createdAt: '2026-04-05' },
+  { id: 3, name: 'Demo Reviewer B', email: 'reviewer.b@example.edu', role: 'Reviewer', status: 'Pending', createdAt: '2026-04-10' },
+  { id: 4, name: 'Admin User', email: 'admin@mefst.example.edu', role: 'Admin', status: 'Active', createdAt: '2026-03-15' }
 ];

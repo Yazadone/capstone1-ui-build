@@ -86,6 +86,39 @@ function datasetCard(dataset){
   `;
 }
 
+function studyResultCard(dataset){
+  const related = ncbiRecords.filter(record => record.datasetId === dataset.id);
+  const year = String(dataset.published).slice(0,4);
+  const savedLabel = isSaved(dataset.id) ? 'Saved ✓' : 'Save Study';
+  return `
+    <article class="study-result-card">
+      <div class="study-result-top">
+        <div>
+          <h2>${dataset.title}</h2>
+          <div class="study-pill-row">
+            <span class="study-pill">${dataset.source.replace('NCBI ','')}</span>
+            <span class="study-pill gray">${dataset.type}</span>
+            <span class="study-pill green">${related.length} linked dataset${related.length === 1 ? '' : 's'}</span>
+          </div>
+        </div>
+        <div class="study-accession">${dataset.currentAccession}</div>
+      </div>
+      <div class="study-mini-meta">
+        <div><span>Population:</span> ${dataset.population}</div>
+        <div><span>Year:</span> ${year}</div>
+        <div><span>Sample Size:</span> ${dataset.samples.toLocaleString()}</div>
+        <div><span>Region:</span> ${dataset.region}</div>
+      </div>
+      <p class="study-description">${shortText(dataset.description, 185)}</p>
+      <div class="related-box">⌘ Related records found in ${related.length ? related.map(record => record.source.replace('NCBI ','')).join(', ') : dataset.source}</div>
+      <div class="result-actions">
+        <a class="small-dark-btn" href="dataset-detail.html?id=${dataset.id}">View Study Details</a>
+        <button class="small-light-btn" type="button" onclick="toggleSave(${dataset.id})">${savedLabel}</button>
+      </div>
+    </article>
+  `;
+}
+
 function renderFeatured(){
   const box = document.getElementById('featuredDatasets');
   if(!box) return;
@@ -103,18 +136,53 @@ function renderFeatured(){
   `).join('');
 }
 
+function getCheckedValues(selector){
+  return Array.from(document.querySelectorAll(selector + ':checked')).map(item => item.value);
+}
+
+function getDatasetYear(dataset){
+  return Number(String(dataset.published).slice(0,4));
+}
+
 function renderDatasets(){
   const list = document.getElementById('datasetList');
   if(!list) return;
   const search = (document.getElementById('datasetSearch')?.value || '').toLowerCase();
-  const type = document.getElementById('datasetFilter')?.value || 'All';
-  const filtered = datasets.filter(dataset => {
-    const matchesSearch = [dataset.title, dataset.description, dataset.accession, dataset.organism, dataset.region, dataset.type, dataset.source].join(' ').toLowerCase().includes(search);
-    const matchesType = type === 'All' || dataset.type === type || dataset.source === type;
-    return matchesSearch && matchesType;
+  const selectedRepos = getCheckedValues('.repositoryFilter');
+  const selectedRegions = getCheckedValues('.regionFilter');
+  const selectedTypes = getCheckedValues('.typeFilter');
+  const yearMin = Number(document.getElementById('yearMin')?.value) || 0;
+  const yearMax = Number(document.getElementById('yearMax')?.value) || 9999;
+  const sampleMin = Number(document.getElementById('sampleMin')?.value) || 0;
+  const sampleMax = Number(document.getElementById('sampleMax')?.value) || Number.MAX_SAFE_INTEGER;
+  const sort = document.getElementById('datasetSort')?.value || 'relevance';
+  let filtered = datasets.filter(dataset => {
+    const year = getDatasetYear(dataset);
+    const matchesSearch = [dataset.title, dataset.description, dataset.accession, dataset.organism, dataset.region, dataset.population, dataset.type, dataset.source].join(' ').toLowerCase().includes(search);
+    const matchesRepo = selectedRepos.length === 0 || selectedRepos.includes(dataset.source);
+    const matchesRegion = selectedRegions.length === 0 || selectedRegions.includes(dataset.region);
+    const matchesType = selectedTypes.length === 0 || selectedTypes.includes(dataset.type);
+    const matchesYear = year >= yearMin && year <= yearMax;
+    const matchesSamples = dataset.samples >= sampleMin && dataset.samples <= sampleMax;
+    return matchesSearch && matchesRepo && matchesRegion && matchesType && matchesYear && matchesSamples;
   });
-  document.getElementById('resultCount').textContent = `${filtered.length} dataset${filtered.length === 1 ? '' : 's'} found`;
-  list.innerHTML = filtered.length ? filtered.map(datasetCard).join('') : `<div class="card empty-state"><div><div class="empty-icon">⌕</div><h2>No datasets found</h2><p>Try a different keyword or filter.</p></div></div>`;
+  if(sort === 'year') filtered = filtered.sort((a,b) => getDatasetYear(b) - getDatasetYear(a));
+  if(sort === 'samples') filtered = filtered.sort((a,b) => b.samples - a.samples);
+  if(sort === 'title') filtered = filtered.sort((a,b) => a.title.localeCompare(b.title));
+  const count = document.getElementById('resultCount');
+  if(count) count.textContent = `${filtered.length} result${filtered.length === 1 ? '' : 's'} found`;
+  list.innerHTML = filtered.length ? filtered.map(studyResultCard).join('') : `<div class="no-results"><strong>No studies found</strong><br><br>Try a different keyword or clear the filters.</div>`;
+}
+
+function clearDatasetFilters(){
+  document.querySelectorAll('.repositoryFilter,.regionFilter,.typeFilter').forEach(item => item.checked = false);
+  ['yearMin','yearMax','sampleMin','sampleMax'].forEach(id => {
+    const input = document.getElementById(id);
+    if(input) input.value = '';
+  });
+  const sort = document.getElementById('datasetSort');
+  if(sort) sort.value = 'relevance';
+  renderDatasets();
 }
 
 function renderSaved(){
@@ -353,9 +421,23 @@ function setupForms(){
 
 function setupSearch(){
   const datasetSearch = document.getElementById('datasetSearch');
-  const datasetFilter = document.getElementById('datasetFilter');
   if(datasetSearch) datasetSearch.addEventListener('input', renderDatasets);
-  if(datasetFilter) datasetFilter.addEventListener('change', renderDatasets);
+
+  const filterSelectors = '.repositoryFilter,.regionFilter,.typeFilter,#yearMin,#yearMax,#sampleMin,#sampleMax,#datasetSort';
+  document.querySelectorAll(filterSelectors).forEach(item => {
+    item.addEventListener('input', renderDatasets);
+    item.addEventListener('change', renderDatasets);
+  });
+
+  const advancedToggle = document.getElementById('advancedToggle');
+  if(advancedToggle){
+    advancedToggle.addEventListener('click', () => {
+      const panel = document.querySelector('.filter-panel');
+      if(!panel) return;
+      panel.scrollIntoView({behavior:'smooth', block:'start'});
+      showToast('Advanced filters are ready to use.');
+    });
+  }
 
   const homeSearch = document.getElementById('homeSearchForm');
   if(homeSearch){
