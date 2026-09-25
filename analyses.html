@@ -7,8 +7,32 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-page="analyses">
-  <header class="topbar"><div class="container nav"><div class="nav-left"><a class="logo" href="home.html"><span class="logo-mark"></span><span>meFST</span></a><nav class="nav-links"><a data-nav="datasets" href="datasets.html">⌕ Datasets</a><a data-nav="compare" href="compare.html">⇄ Compare</a><a data-nav="saved" href="saved.html">♡ Saved</a><a data-nav="documentation" href="documentation.html">▤ Documentation</a><a data-nav="requests" href="access-requests.html">☑ Requests</a><a data-nav="analyses" href="analyses.html">◈ Analyses</a><a data-nav="admin" href="admin.html">⚙ Admin</a></nav></div><div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div></div></header>
-  <main class="container"><section class="page-title"><h1>Analyses</h1><p>Run and review population-genomics analyses using selected datasets.</p></section><section class="grid grid-3" style="margin-bottom:24px"><div class="card feature-card"><div class="feature-icon">PCA</div><h3>Population PCA</h3><p>Visualize population structure with selected SNP markers.</p><br><button class="btn btn-dark" onclick="showToast('Mock PCA analysis started')">Run PCA</button></div><div class="card feature-card"><div class="feature-icon">DNA</div><h3>Admixture Summary</h3><p>Summarize mock population grouping and ancestry components.</p><br><button class="btn btn-dark" onclick="showToast('Mock admixture analysis started')">Run Admixture</button></div><div class="card feature-card"><div class="feature-icon">MAP</div><h3>Regional Heatmap</h3><p>Preview marker or methylation patterns by region.</p><br><button class="btn btn-dark" onclick="showToast('Mock heatmap created')">Create Heatmap</button></div></section><section class="card table-wrap"><table class="table"><thead><tr><th>Analysis</th><th>User</th><th>Filters</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead><tbody id="analysisTableBody"></tbody></table></section></main>
-  <footer class="footer">meFST mock UI demo • No real analysis is performed</footer><script src="data.js"></script><script src="app.js"></script>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>meFST</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="compare" href="compare.html">⇄ Compare</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions" id="topNavActions"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-title"><h1>Analyses</h1><p>Mock analysis results using selected filters and dataset records.</p></section>
+    <section class="grid grid-3" style="margin-bottom:24px"><div class="card feature-card"><div class="feature-icon">PCA</div><h3>Population PCA</h3><p>Visualize population structure with selected SNP markers.</p><br><button class="btn btn-dark" onclick="showToast('Mock PCA analysis started')">Run PCA</button></div><div class="card feature-card"><div class="feature-icon">DNA</div><h3>Admixture Summary</h3><p>Summarize mock population grouping and ancestry components.</p><br><button class="btn btn-dark" onclick="showToast('Mock admixture analysis started')">Run Admixture</button></div><div class="card feature-card"><div class="feature-icon">MAP</div><h3>Regional Heatmap</h3><p>Preview marker or methylation patterns by region.</p><br><button class="btn btn-dark" onclick="showToast('Mock heatmap created')">Create Heatmap</button></div></section>
+    <section class="card table-wrap"><table class="table"><thead><tr><th>Analysis</th><th>User</th><th>Filters</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead><tbody id="analysisTableBody"></tbody></table></section>
+  </main>
+
+  <footer class="footer">meFST mock UI demo • No real analysis is performed</footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

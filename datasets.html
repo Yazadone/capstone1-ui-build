@@ -3,105 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>meFST | Search</title>
+  <title>meFST | Datasets</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-page="datasets">
-  <header class="study-topbar">
-    <div class="study-nav">
-      <a class="study-brand" href="home.html">meFST</a>
-      <nav class="study-links">
-        <a href="home.html">Home</a>
-        <a class="active" href="datasets.html">Search</a>
-        <a href="saved.html">Saved Studies</a>
-        <a href="documentation.html">About</a>
-        <a href="documentation.html">Help</a>
-      </nav>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>meFST</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="compare" href="compare.html">⇄ Compare</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions" id="topNavActions"></div>
     </div>
   </header>
 
-  <main class="study-shell">
-    <section class="study-heading">
-      <h1>meFST Search</h1>
+  <main class="container">
+    <section class="page-title">
+      <h1>Dataset Search</h1>
       <p>Search human population genomics datasets from multiple public repositories.</p>
     </section>
 
-    <section class="study-search-card">
-      <div class="study-search-row">
-        <input id="datasetSearch" class="study-search-input" placeholder="Search by study name, population, repository, or keyword">
-        <button class="study-dark-btn" type="button" onclick="renderDatasets()">Search</button>
+    <section class="card card-pad" style="margin-bottom:24px">
+      <div class="search-line">
+        <input id="datasetSearch" class="input" placeholder="Search by study name, population, repository, or keyword">
+        <button class="btn btn-dark" type="button" onclick="renderDatasets()">Search</button>
       </div>
-      <button id="advancedToggle" class="advanced-btn" type="button">Advanced Search ▾</button>
+      <button id="advancedToggle" class="btn btn-ghost" type="button">Advanced Search ▾</button>
     </section>
 
     <section class="study-grid">
       <aside class="filter-panel">
         <div class="filter-title">⌕ Filters</div>
-
-        <div class="filter-group">
-          <h3>Repository</h3>
-          <label><input type="checkbox" class="repositoryFilter" value="NCBI GEO"> GEO</label>
-          <label><input type="checkbox" class="repositoryFilter" value="NCBI SRA"> SRA</label>
-          <label><input type="checkbox" class="repositoryFilter" value="ArrayExpress"> ArrayExpress</label>
-          <label><input type="checkbox" class="repositoryFilter" value="ENA"> ENA</label>
-        </div>
-
-        <div class="filter-group">
-          <h3>Population / Region</h3>
-          <label><input type="checkbox" class="regionFilter" value="Sub-Saharan Africa"> Africa</label>
-          <label><input type="checkbox" class="regionFilter" value="Central Europe"> Europe</label>
-          <label><input type="checkbox" class="regionFilter" value="East Asia"> Asia</label>
-          <label><input type="checkbox" class="regionFilter" value="North America"> North America</label>
-          <label><input type="checkbox" class="regionFilter" value="South America"> South America</label>
-        </div>
-
-        <div class="filter-group">
-          <h3>Data Type</h3>
-          <label><input type="checkbox" class="typeFilter" value="SNP Genotyping"> SNP array</label>
-          <label><input type="checkbox" class="typeFilter" value="Gene Expression"> Gene expression data</label>
-          <label><input type="checkbox" class="typeFilter" value="Methylation Array"> Expression data</label>
-          <label><input type="checkbox" class="typeFilter" value="Expression Array"> Sequencing data</label>
-        </div>
-
-        <div class="filter-group">
-          <h3>Publication Year</h3>
-          <div class="range-row">
-            <input id="yearMin" placeholder="From">
-            <input id="yearMax" placeholder="To">
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <h3>Sample Size</h3>
-          <div class="range-row">
-            <input id="sampleMin" placeholder="Min">
-            <input id="sampleMax" placeholder="Max">
-          </div>
-        </div>
-
+        <div class="filter-group"><h3>Repository</h3><label><input type="checkbox" class="repositoryFilter" value="NCBI GEO"> GEO</label><label><input type="checkbox" class="repositoryFilter" value="NCBI SRA"> SRA</label><label><input type="checkbox" class="repositoryFilter" value="ArrayExpress"> ArrayExpress</label><label><input type="checkbox" class="repositoryFilter" value="ENA"> ENA</label></div>
+        <div class="filter-group"><h3>Population / Region</h3><label><input type="checkbox" class="regionFilter" value="Sub-Saharan Africa"> Africa</label><label><input type="checkbox" class="regionFilter" value="Central Europe"> Europe</label><label><input type="checkbox" class="regionFilter" value="East Asia"> Asia</label><label><input type="checkbox" class="regionFilter" value="North America"> North America</label><label><input type="checkbox" class="regionFilter" value="South America"> South America</label></div>
+        <div class="filter-group"><h3>Data Type</h3><label><input type="checkbox" class="typeFilter" value="SNP Genotyping"> SNP array</label><label><input type="checkbox" class="typeFilter" value="Gene Expression"> Gene expression data</label><label><input type="checkbox" class="typeFilter" value="Methylation Array"> Expression data</label><label><input type="checkbox" class="typeFilter" value="Expression Array"> Sequencing data</label></div>
+        <div class="filter-group"><h3>Publication Year</h3><div class="range-row"><input id="yearMin" placeholder="From"><input id="yearMax" placeholder="To"></div></div>
+        <div class="filter-group"><h3>Sample Size</h3><div class="range-row"><input id="sampleMin" placeholder="Min"><input id="sampleMax" placeholder="Max"></div></div>
         <button class="clear-btn" type="button" onclick="clearDatasetFilters()">Clear Filters</button>
       </aside>
 
       <section class="study-results">
-        <div class="result-toolbar">
-          <span id="resultCount">0 results found</span>
-          <label class="sort-label">Sort by:
-            <select id="datasetSort">
-              <option value="relevance">Relevance</option>
-              <option value="year">Newest Year</option>
-              <option value="samples">Sample Size</option>
-              <option value="title">Title</option>
-            </select>
-          </label>
-        </div>
+        <div class="result-toolbar"><span id="resultCount">0 results found</span><label class="sort-label">Sort by:<select id="datasetSort"><option value="relevance">Relevance</option><option value="year">Newest Year</option><option value="samples">Sample Size</option><option value="title">Title</option></select></label></div>
         <div id="datasetList" class="study-result-list"></div>
-        <div class="pagination-row">
-          <span>Page 1 of 1</span>
-          <div>
-            <button class="page-btn" type="button" onclick="showToast('Previous page is disabled in this demo')">‹ Previous</button>
-            <button class="page-btn" type="button" onclick="showToast('Next page is disabled in this demo')">Next ›</button>
-          </div>
-        </div>
+        <div class="pagination-row"><span>Page 1 of 1</span><div><button class="page-btn" type="button" onclick="showToast('Previous page is disabled in this demo')">‹ Previous</button><button class="page-btn" type="button" onclick="showToast('Next page is disabled in this demo')">Next ›</button></div></div>
       </section>
     </section>
   </main>

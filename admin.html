@@ -13,6 +13,7 @@
         <a class="logo" href="home.html"><span class="logo-mark"></span><span>meFST</span></a>
         <nav class="nav-links">
           <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="compare" href="compare.html">⇄ Compare</a>
           <a data-nav="saved" href="saved.html">♡ Saved</a>
           <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
           <a data-nav="requests" href="access-requests.html">☑ Requests</a>
@@ -20,74 +21,18 @@
           <a data-nav="admin" href="admin.html">⚙ Admin</a>
         </nav>
       </div>
-      <div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div>
+      <div class="nav-actions" id="topNavActions"></div>
     </div>
   </header>
 
   <main class="container">
-    <section class="page-title">
-      <h1>Admin Dashboard</h1>
-      <p>Manage users, datasets, registrations, and access request workflow for the demo.</p>
-    </section>
-
-    <section class="grid grid-4" style="margin-bottom:24px">
-      <div class="card stat-card"><div class="stat-icon">👤</div><div><div class="stat-number">4</div><div class="stat-label">Users</div></div></div>
-      <div class="card stat-card"><div class="stat-icon">▤</div><div><div class="stat-number">4</div><div class="stat-label">Datasets</div></div></div>
-      <div class="card stat-card"><div class="stat-icon">☑</div><div><div class="stat-number">4</div><div class="stat-label">Requests</div></div></div>
-      <div class="card stat-card"><div class="stat-icon">◈</div><div><div class="stat-number">3</div><div class="stat-label">Analyses</div></div></div>
-    </section>
-
-    <div class="admin-tabs">
-      <button class="tab-btn active" data-admin-tab="overviewPanel">Overview</button>
-      <button class="tab-btn" data-admin-tab="usersPanel">Users</button>
-      <button class="tab-btn" data-admin-tab="requestsPanel">Requests</button>
-      <button class="tab-btn" data-admin-tab="datasetsPanel">Datasets</button>
-    </div>
-
-    <section id="overviewPanel" class="admin-panel active">
-      <div class="grid grid-2">
-        <div class="card card-pad">
-          <h2>Platform Activity</h2>
-          <p class="muted">Mock chart showing activity across the platform.</p>
-          <div class="chart-placeholder">
-            <div class="bar" style="height:45%"></div>
-            <div class="bar" style="height:70%"></div>
-            <div class="bar" style="height:55%"></div>
-            <div class="bar" style="height:85%"></div>
-            <div class="bar" style="height:65%"></div>
-            <div class="bar" style="height:92%"></div>
-          </div>
-        </div>
-        <div class="card card-pad">
-          <h2>Quick Actions</h2>
-          <p class="muted">These buttons are clickable but only show demo messages.</p>
-          <div class="grid">
-            <button class="btn btn-dark" onclick="showToast('Mock upload dataset screen opened')">Upload Dataset</button>
-            <button class="btn btn-outline" onclick="showToast('Mock registration review opened')">Review Registrations</button>
-            <button class="btn btn-outline" onclick="showToast('Mock HIPAA authorization report opened')">HIPAA Authorization Report</button>
-            <a class="btn btn-outline" href="exports.html">View Export History</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="usersPanel" class="admin-panel">
-      <div class="card table-wrap">
-        <table class="table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Created</th><th>Action</th></tr></thead><tbody id="usersBody"></tbody></table>
-      </div>
-    </section>
-
-    <section id="requestsPanel" class="admin-panel">
-      <div class="card table-wrap">
-        <table class="table"><thead><tr><th>ID</th><th>User</th><th>Dataset</th><th>Status</th><th>Action</th></tr></thead><tbody id="adminRequestsBody"></tbody></table>
-      </div>
-    </section>
-
-    <section id="datasetsPanel" class="admin-panel">
-      <div class="card table-wrap">
-        <table class="table"><thead><tr><th>Dataset</th><th>Accession</th><th>Source</th><th>Samples</th><th>Status</th><th>Action</th></tr></thead><tbody id="adminDatasetsBody"></tbody></table>
-      </div>
-    </section>
+    <section class="page-title"><h1>Admin Dashboard</h1><p>Manage users, datasets, registrations, and access request workflow for the demo.</p></section>
+    <section class="grid grid-4" style="margin-bottom:24px"><div class="card stat-card"><div class="stat-icon">👤</div><div><div class="stat-number">4</div><div class="stat-label">Users</div></div></div><div class="card stat-card"><div class="stat-icon">▤</div><div><div class="stat-number">4</div><div class="stat-label">Datasets</div></div></div><div class="card stat-card"><div class="stat-icon">☑</div><div><div class="stat-number">4</div><div class="stat-label">Requests</div></div></div><div class="card stat-card"><div class="stat-icon">◈</div><div><div class="stat-number">3</div><div class="stat-label">Analyses</div></div></div></section>
+    <div class="admin-tabs"><button class="tab-btn active" data-admin-tab="overviewPanel">Overview</button><button class="tab-btn" data-admin-tab="usersPanel">Users</button><button class="tab-btn" data-admin-tab="requestsPanel">Requests</button><button class="tab-btn" data-admin-tab="datasetsPanel">Datasets</button></div>
+    <section id="overviewPanel" class="admin-panel active"><div class="grid grid-2"><div class="card card-pad"><h2>Platform Activity</h2><p class="muted">Mock chart showing activity across the platform.</p><div class="chart-placeholder"><div class="bar" style="height:45%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:55%"></div><div class="bar" style="height:85%"></div><div class="bar" style="height:65%"></div><div class="bar" style="height:92%"></div></div></div><div class="card card-pad"><h2>Quick Actions</h2><p class="muted">These buttons are clickable but only show demo messages.</p><div class="grid"><button class="btn btn-dark" onclick="showToast('Mock upload dataset screen opened')">Upload Dataset</button><button class="btn btn-outline" onclick="showToast('Mock registration review opened')">Review Registrations</button><button class="btn btn-outline" onclick="showToast('Mock HIPAA authorization report opened')">HIPAA Authorization Report</button><a class="btn btn-outline" href="exports.html">View Export History</a></div></div></div></section>
+    <section id="usersPanel" class="admin-panel"><div class="card table-wrap"><table class="table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Created</th><th>Action</th></tr></thead><tbody id="usersBody"></tbody></table></div></section>
+    <section id="requestsPanel" class="admin-panel"><div class="card table-wrap"><table class="table"><thead><tr><th>ID</th><th>User</th><th>Dataset</th><th>Status</th><th>Action</th></tr></thead><tbody id="adminRequestsBody"></tbody></table></div></section>
+    <section id="datasetsPanel" class="admin-panel"><div class="card table-wrap"><table class="table"><thead><tr><th>Dataset</th><th>Accession</th><th>Source</th><th>Samples</th><th>Status</th><th>Action</th></tr></thead><tbody id="adminDatasetsBody"></tbody></table></div></section>
   </main>
 
   <footer class="footer">meFST mock UI demo • Admin page uses local mock data only</footer>

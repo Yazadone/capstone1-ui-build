@@ -1,3 +1,36 @@
+function getSignedInStatus(){
+  try { return localStorage.getItem('mefstSignedIn') === 'true'; }
+  catch { return false; }
+}
+
+function setSignedInStatus(bool){
+  try { localStorage.setItem('mefstSignedIn', String(bool)); }
+  catch {}
+}
+
+function renderTopNavActions(){
+  const target = document.getElementById('topNavActions');
+  if(!target) return;
+  const signedIn = getSignedInStatus();
+  if(signedIn){
+    target.innerHTML = `
+      <span class="welcome-label">Welcome, Demo Researcher</span>
+      <button class="btn btn-outline" type="button" onclick="logoutUser()">Log Out</button>
+    `;
+  } else {
+    target.innerHTML = `
+      <a href="index.html">Sign In</a>
+      <a class="btn btn-primary" href="register.html">Sign Up</a>
+    `;
+  }
+}
+
+function logoutUser(){
+  setSignedInStatus(false);
+  renderTopNavActions();
+  window.location.href = 'index.html';
+}
+
 function getDatasetIdFromUrl(){
   const params = new URLSearchParams(window.location.search);
   return Number(params.get('id')) || 1;
@@ -23,7 +56,7 @@ function toggleSave(id){
   if(ids.includes(id)){
     setSavedIds(ids.filter(item => item !== id));
     message = 'Dataset removed from saved list.';
-  }else{
+  } else {
     ids.push(id);
     setSavedIds(ids);
     message = 'Dataset saved for later.';
@@ -127,9 +160,7 @@ function renderFeatured(){
       <div><span class="tag">${dataset.accession}</span></div>
       <h3>${dataset.title}</h3>
       <p class="muted">${shortText(dataset.description, 130)}</p>
-      <div class="quick-tags">
-        <span>${dataset.organism}</span><span>${dataset.samples.toLocaleString()} samples</span><span>${dataset.region}</span>
-      </div>
+      <div class="quick-tags"><span>${dataset.organism}</span><span>${dataset.samples.toLocaleString()} samples</span><span>${dataset.region}</span></div>
       <br>
       <a class="btn btn-dark" href="dataset-detail.html?id=${dataset.id}">View Details</a>
     </article>
@@ -200,7 +231,7 @@ function renderSaved(){
         </div>
       </div>
     `;
-  }else{
+  } else {
     list.innerHTML = `<div class="dataset-list">${saved.map(datasetCard).join('')}</div>`;
   }
 }
@@ -225,50 +256,12 @@ function renderDetail(){
             <div class="metric"><strong>${dataset.taxId}</strong><span>Tax ID</span></div>
           </div>
         </section>
-
-        <section class="card card-pad" style="margin-top:20px">
-          <h2>Dataset Information</h2>
-          <div class="info-table">
-            <div class="info-row"><span>Current Accession</span><strong>${dataset.currentAccession}</strong></div>
-            <div class="info-row"><span>Organism</span><strong>${dataset.organism} (${dataset.commonName})</strong></div>
-            <div class="info-row"><span>Tissue / Sample Type</span><strong>${dataset.tissue}</strong></div>
-            <div class="info-row"><span>Population</span><strong>${dataset.population}</strong></div>
-            <div class="info-row"><span>Geographic Region</span><strong>${dataset.region}</strong></div>
-            <div class="info-row"><span>Platform</span><strong>${dataset.platform}</strong></div>
-            <div class="info-row"><span>Published Date</span><strong>${dataset.published}</strong></div>
-          </div>
-        </section>
-
-        <section class="card card-pad" style="margin-top:20px">
-          <h2>Linked NCBI / Repository Records</h2>
-          ${related.length ? related.map(record => `
-            <div class="record-row">
-              <div>
-                <strong>${record.title}</strong>
-                <div class="muted">${record.source} • ${record.recordType} • ${record.accession}</div>
-              </div>
-              <div class="muted">Updated ${record.lastUpdated}</div>
-            </div>
-          `).join('') : '<p class="muted">No linked records found for this mock dataset.</p>'}
-        </section>
+        <section class="card card-pad" style="margin-top:20px"><h2>Dataset Information</h2><div class="info-table"><div class="info-row"><span>Current Accession</span><strong>${dataset.currentAccession}</strong></div><div class="info-row"><span>Organism</span><strong>${dataset.organism} (${dataset.commonName})</strong></div><div class="info-row"><span>Tissue / Sample Type</span><strong>${dataset.tissue}</strong></div><div class="info-row"><span>Population</span><strong>${dataset.population}</strong></div><div class="info-row"><span>Geographic Region</span><strong>${dataset.region}</strong></div><div class="info-row"><span>Platform</span><strong>${dataset.platform}</strong></div><div class="info-row"><span>Published Date</span><strong>${dataset.published}</strong></div></div></section>
+        <section class="card card-pad" style="margin-top:20px"><h2>Linked NCBI / Repository Records</h2>${related.length ? related.map(record => `<div class="record-row"><div><strong>${record.title}</strong><div class="muted">${record.source} • ${record.recordType} • ${record.accession}</div></div><div class="muted">Updated ${record.lastUpdated}</div></div>`).join('') : '<p class="muted">No linked records found for this mock dataset.</p>'}</section>
       </main>
       <aside>
-        <section class="side-card card">
-          <h3>Actions</h3>
-          <button class="btn btn-dark btn-block" onclick="openRequestModal(${dataset.id})">Request Access</button><br><br>
-          <button class="btn btn-outline btn-block" onclick="toggleSave(${dataset.id})">${isSaved(dataset.id) ? 'Remove Saved Dataset' : 'Save Dataset'}</button><br><br>
-          <a class="btn btn-outline btn-block" href="analyses.html">Run Mock Analysis</a>
-        </section>
-        <section class="side-card card">
-          <h3>Status</h3>
-          ${statusBadge(dataset.status)}
-          <br><br>
-          <div class="info-table">
-            <div class="info-row"><span>Uploaded By</span><strong>Admin</strong></div>
-            <div class="info-row"><span>HIPAA Access</span><strong>Required</strong></div>
-            <div class="info-row"><span>Export</span><strong>CSV / PDF</strong></div>
-          </div>
-        </section>
+        <section class="side-card card"><h3>Actions</h3><button class="btn btn-dark btn-block" onclick="openRequestModal(${dataset.id})">Request Access</button><br><br><button class="btn btn-outline btn-block" onclick="toggleSave(${dataset.id})">${isSaved(dataset.id) ? 'Remove Saved Dataset' : 'Save Dataset'}</button><br><br><a class="btn btn-outline btn-block" href="analyses.html">Run Mock Analysis</a></section>
+        <section class="side-card card"><h3>Status</h3>${statusBadge(dataset.status)}<br><br><div class="info-table"><div class="info-row"><span>Uploaded By</span><strong>Admin</strong></div><div class="info-row"><span>HIPAA Access</span><strong>Required</strong></div><div class="info-row"><span>Export</span><strong>CSV / PDF</strong></div></div></section>
       </aside>
     </div>
   `;
@@ -356,7 +349,7 @@ function renderAdmin(){
   const datasetsBody = document.getElementById('adminDatasetsBody');
   if(usersBody){
     usersBody.innerHTML = users.map(user => `
-      <tr><td><strong>${user.name}</strong></td><td>${user.email}</td><td>${user.role}</td><td>${statusBadge(user.status)}</td><td>${user.createdAt}</td><td><button class="btn btn-outline" onclick="showToast('Mock edit user: ${user.name}')">Edit</button></td></tr>
+      <tr><td><strong>${user.name}</strong></td><td>${user.email}</td><td>${user.role}</td><td>${statusBadge(user.status)}</td><td>${user.createdAt}</td><td><button class="btn btn-outline" onclick="showToast('User profile opened for ${user.name}')">View</button></td></tr>
     `).join('');
   }
   if(requestsBody){
@@ -366,7 +359,7 @@ function renderAdmin(){
   }
   if(datasetsBody){
     datasetsBody.innerHTML = datasets.map(dataset => `
-      <tr><td><strong>${dataset.title}</strong></td><td>${dataset.accession}</td><td>${dataset.source}</td><td>${dataset.samples.toLocaleString()}</td><td>${statusBadge(dataset.status)}</td><td><a class="btn btn-outline" href="dataset-detail.html?id=${dataset.id}">Open</a></td></tr>
+      <tr><td><strong>${dataset.title}</strong></td><td>${dataset.accession}</td><td>${dataset.source}</td><td>${dataset.samples.toLocaleString()}</td><td>${statusBadge(dataset.status)}</td><td><button class="btn btn-outline" onclick="showToast('Dataset row opened for ${dataset.title}')">View</button></td></tr>
     `).join('');
   }
 }
@@ -402,6 +395,8 @@ function setupForms(){
         document.getElementById('loginError').classList.add('show');
         return;
       }
+      setSignedInStatus(true);
+      renderTopNavActions();
       window.location.href = 'home.html';
     });
   }
@@ -462,6 +457,7 @@ function setActiveNav(){
 }
 
 function init(){
+  renderTopNavActions();
   setActiveNav();
   setupForms();
   setupSearch();
