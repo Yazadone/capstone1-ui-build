@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>meFST | Compare Populations</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="comparison.css">
+</head>
+<body data-page="compare">
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>meFST</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="compare" href="compare.html">⇄ Compare</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-title">
+      <h1>Compare Populations</h1>
+      <p>Compare the same gene and SNP variant across two different reference populations.</p>
+    </section>
+
+    <section class="comparison-card card card-pad" aria-labelledby="comparisonTitle">
+      <div class="comparison-heading">
+        <div>
+          <span class="tag">Same variant • different populations</span>
+          <h2 id="comparisonTitle">Compare one SNP across two groups</h2>
+          <p class="muted">The SNP, chromosome, position, gene, and assembly stay the same. Only the reference populations and allele frequencies change.</p>
+        </div>
+        <button id="resetComparison" class="btn btn-outline" type="button">Reset filters</button>
+      </div>
+
+      <div class="comparison-filters">
+        <label>Gene<select id="comparisonGene"><option value="HERC2">HERC2</option></select></label>
+        <label>SNP / RSID<select id="comparisonVariant"><option value="rs12913832">rs12913832</option></select></label>
+        <label>Continent — Population 1<select id="comparisonPop1"><option value="">All populations</option></select></label>
+        <label>Continent — Population 2<select id="comparisonPop2"><option value="">All populations</option></select></label>
+        <label>Sort by<select id="comparisonSort"><option value="original">Input order</option><option value="fst">Highest FST</option><option value="delta">Highest Delta</option><option value="frequency">Largest AF gap</option></select></label>
+      </div>
+
+      <div class="comparison-summary" id="comparisonSummary"></div>
+      <div class="comparison-table-wrap">
+        <table class="table comparison-table">
+          <thead><tr><th>Same SNP</th><th>Gene</th><th>Population 1</th><th>Population 2</th><th>AF 1</th><th>AF 2</th><th>Delta</th><th>FST</th></tr></thead>
+          <tbody id="comparisonTableBody"></tbody>
+        </table>
+      </div>
+      <p class="comparison-note">AF = allele frequency. Delta and FST are supplied comparison metrics. Population codes are reference groups; they do not imply that every person from a country or city has the same genetic profile.</p>
+    </section>
+  </main>
+
+  <footer class="footer">meFST mock UI demo • No real analysis is performed</footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="population-comparison.js"></script>
+</body>
+</html>

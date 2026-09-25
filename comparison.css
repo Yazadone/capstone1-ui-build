@@ -1,25 +1,2 @@
 :root{--comparison-blue:#2f5cf6;--comparison-teal:#0f766e}
-.comparison-card{margin-bottom:24px}
-.comparison-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:22px}
-.comparison-heading h2{font-size:24px;margin:12px 0 8px}
-.comparison-heading p{max-width:720px;margin:0;line-height:1.55}
-.comparison-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
-.comparison-stat{border:1px solid #e5e7eb;border-radius:12px;background:#f8fafc;padding:14px}
-.comparison-stat strong{display:block;font-size:20px;color:#111827;margin-bottom:4px}
-.comparison-stat span{font-size:12px;color:#6b7280}
-.comparison-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:16px;border:1px solid #e5e7eb;border-radius:12px;background:#fafafa;margin-bottom:18px}
-.comparison-filters label{margin:0;font-size:13px}
-.comparison-filters select{margin-top:7px;background:#fff}
-.comparison-table-wrap{overflow:auto;border:1px solid #e5e7eb;border-radius:12px}
-.comparison-table{min-width:850px}
-.comparison-table th{white-space:nowrap;background:#f8fafc}
-.comparison-table td{vertical-align:middle}
-.population-code{font-weight:800;color:#111827}
-.population-label{display:block;color:#6b7280;font-size:11px;margin-top:3px}
-.metric-value{font-variant-numeric:tabular-nums;font-weight:700}
-.metric-bar{height:6px;border-radius:999px;background:#e5e7eb;margin-top:6px;min-width:70px;overflow:hidden}
-.metric-bar span{display:block;height:100%;border-radius:inherit;background:var(--comparison-blue)}
-.metric-bar.teal span{background:var(--comparison-teal)}
-.comparison-note{font-size:12px;color:#6b7280;line-height:1.5;margin:14px 0 0}
-@media(max-width:700px){.comparison-heading{flex-direction:column}.comparison-summary,.comparison-filters{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.comparison-summary,.comparison-filters{grid-template-columns:1fr}}
+.comparison-card{margin-bottom:24px}.comparison-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:22px}.comparison-heading h2{font-size:24px;margin:12px 0 8px}.comparison-heading p{max-width:720px;margin:0;line-height:1.55}.comparison-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}.comparison-stat{border:1px solid #e5e7eb;border-radius:12px;background:#f8fafc;padding:14px}.comparison-stat strong{display:block;font-size:18px;color:#111827;margin-bottom:4px;overflow-wrap:anywhere}.comparison-stat span{font-size:12px;color:#6b7280}.comparison-filters{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;padding:16px;border:1px solid #e5e7eb;border-radius:12px;background:#fafafa;margin-bottom:18px}.comparison-filters label{margin:0;font-size:13px}.comparison-filters select{margin-top:7px;background:#fff}.comparison-table-wrap{overflow:auto;border:1px solid #e5e7eb;border-radius:12px}.comparison-table{min-width:1050px}.comparison-table th{white-space:nowrap;background:#f8fafc}.comparison-table td{vertical-align:middle}.variant-code,.gene-code,.population-code{font-weight:800;color:#111827}.population-label{display:block;color:#6b7280;font-size:11px;margin-top:3px}.metric-value{font-variant-numeric:tabular-nums;font-weight:700}.metric-bar{height:6px;border-radius:999px;background:#e5e7eb;margin-top:6px;min-width:70px;overflow:hidden}.metric-bar span{display:block;height:100%;border-radius:inherit;background:var(--comparison-blue)}.metric-bar.teal span{background:var(--comparison-teal)}.comparison-note{font-size:12px;color:#6b7280;line-height:1.5;margin:14px 0 0}@media(max-width:900px){.comparison-filters{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:700px){.comparison-heading{flex-direction:column}.comparison-summary,.comparison-filters{grid-template-columns:1fr 1fr}}@media(max-width:480px){.comparison-summary,.comparison-filters{grid-template-columns:1fr}}
