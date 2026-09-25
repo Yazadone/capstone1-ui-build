@@ -24,16 +24,25 @@
       <div class="nav-actions" id="topNavActions"></div>
     </div>
   </header>
-
   <main class="container">
     <section class="page-title"><a class="link" href="datasets.html">← Back to Dataset Discovery</a></section>
     <section id="detailArea"></section>
   </main>
-
-  <div id="requestModal" class="modal-bg"><div class="modal"><h2>Request Dataset Access</h2><p>You are requesting access to: <strong id="modalDatasetTitle">Dataset</strong></p><form id="requestForm"><input type="hidden" id="requestDatasetId"><label>Reason for Access</label><textarea required>I need access to this dataset for class research and population genomics analysis.</textarea><div class="modal-actions"><button type="button" class="btn btn-outline" onclick="closeRequestModal()">Cancel</button><button type="submit" class="btn btn-dark">Submit Request</button></div></form></div></div>
-
+  <div id="requestModal" class="modal-bg">
+    <div class="modal">
+      <h2>Request Dataset Access</h2>
+      <p>You are requesting access to: <strong id="modalDatasetTitle">Dataset</strong></p>
+      <form id="requestForm">
+        <input type="hidden" id="requestDatasetId">
+        <label>Reason for Access</label>
+        <textarea required>I need access to this dataset for class research and population genomics analysis.</textarea>
+        <div class="modal-actions"><button type="button" class="btn btn-outline" onclick="closeRequestModal()">Cancel</button><button type="submit" class="btn btn-dark">Submit Request</button></div>
+      </form>
+    </div>
+  </div>
   <footer class="footer">meFST mock UI demo • Request button only creates a demo message</footer>
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script src="variants.js"></script>
 </body>
 </html>
