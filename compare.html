@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>popArrayDB | Compare Genes and SNPs</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .compare-shell{width:min(1120px,92%);margin:34px auto 60px}
+    .compare-header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:28px}
+    .compare-header h1{margin:0 0 10px;font-size:32px}
+    .compare-header p{margin:0;color:var(--muted);font-size:17px}
+    .search-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+    .search-panel{padding:22px;border:2px solid #e5e7eb;border-radius:16px;background:#fff}
+    .search-panel.secondary{border-color:#c7d2fe}
+    .search-panel h2{margin:0 0 18px;font-size:19px}
+    .search-panel .field{margin-bottom:16px}
+    .search-panel select{background:#fff}
+    .search-panel .help{margin:8px 0 0}
+    .compare-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:22px}
+    .results{margin-top:24px}
+    .results h2{margin:0 0 14px}
+    .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .result-card{padding:22px;background:#fff;border:1px solid var(--line);border-radius:16px}
+    .result-card h3{margin:10px 0 4px;font-size:22px}
+    .result-card .location{color:var(--muted);margin-bottom:18px}
+    .result-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .result-metrics div{padding:12px;background:var(--soft);border-radius:10px}
+    .result-metrics strong,.result-metrics span{display:block}
+    .result-metrics span{font-size:12px;color:var(--muted);margin-top:4px}
+    @media(max-width:720px){.search-grid,.result-grid{grid-template-columns:1fr}.compare-header{display:block}.compare-header .btn{margin-top:18px}.result-metrics{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body data-page="compare">
+  <header class="topbar">
+    <div class="container nav">
+      <div class="nav-left">
+        <a class="logo" href="home.html"><span class="logo-mark"></span><span>popArrayDB</span></a>
+        <nav class="nav-links">
+          <a data-nav="datasets" href="datasets.html">⌕ Datasets</a>
+          <a data-nav="compare" class="active" href="compare.html">⇄ Compare</a>
+          <a data-nav="saved" href="saved.html">♡ Saved</a>
+          <a data-nav="documentation" href="documentation.html">▤ Documentation</a>
+          <a data-nav="requests" href="access-requests.html">☑ Requests</a>
+          <a data-nav="analyses" href="analyses.html">◈ Analyses</a>
+          <a data-nav="admin" href="admin.html">⚙ Admin</a>
+        </nav>
+      </div>
+      <div class="nav-actions"><a href="index.html">Sign In</a><a class="btn btn-primary" href="register.html">Sign Up</a></div>
+    </div>
+  </header>
+
+  <main class="compare-shell">
+    <div class="compare-header">
+      <div>
+        <span class="badge badge-blue">Gene and SNP tester</span>
+        <h1>Search two genes or SNPs</h1>
+        <p>Choose a gene and SNP/RSID in each search panel to compare variants side by side.</p>
+      </div>
+      <button class="btn btn-outline" id="resetCompare" type="button">Reset searches</button>
+    </div>
+
+    <section class="card card-pad">
+      <div class="search-grid">
+        <div class="search-panel">
+          <h2>Search option 1</h2>
+          <div class="field">
+            <label for="geneOne">Gene</label>
+            <select id="geneOne">
+              <option value="HERC2">HERC2</option>
+              <option value="MC1R">MC1R</option>
+              <option value="OCA2">OCA2</option>
+              <option value="SLC24A4">SLC24A4</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="snpOne">SNP / RSID</label>
+            <select id="snpOne">
+              <option value="rs12913832">rs12913832</option>
+              <option value="rs1805007">rs1805007</option>
+              <option value="rs1800407">rs1800407</option>
+              <option value="rs12896399">rs12896399</option>
+            </select>
+          </div>
+          <p class="help">Select the first gene and variant for the tester.</p>
+        </div>
+
+        <div class="search-panel secondary">
+          <h2>Search option 2</h2>
+          <div class="field">
+            <label for="geneTwo">Gene</label>
+            <select id="geneTwo">
+              <option value="MC1R">MC1R</option>
+              <option value="HERC2">HERC2</option>
+              <option value="OCA2">OCA2</option>
+              <option value="SLC24A4">SLC24A4</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="snpTwo">SNP / RSID</label>
+            <select id="snpTwo">
+              <option value="rs1805007">rs1805007</option>
+              <option value="rs12913832">rs12913832</option>
+              <option value="rs1800407">rs1800407</option>
+              <option value="rs12896399">rs12896399</option>
+            </select>
+          </div>
+          <p class="help">Use this second option to search a different gene or SNP/RSID.</p>
+        </div>
+      </div>
+      <div class="compare-actions">
+        <button class="btn btn-dark" id="runCompare" type="button">Search both variants</button>
+      </div>
+    </section>
+
+    <section class="results" aria-live="polite">
+      <h2>Tester results</h2>
+      <div class="result-grid" id="resultGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">popArrayDB mock UI demo • Variant search uses sample data</footer>
+  <script>
+    const variantData = {
+      HERC2: { rs12913832: ['chr15:28365618', 'hg19', '0.078125', '0.909091', '0.830966'], rs1805007: ['chr16:89986117', 'hg19', '0.112000', '0.761000', '0.649000'], rs1800407: ['chr15:28000000', 'hg19', '0.204000', '0.612000', '0.408000'], rs12896399: ['chr14:92773663', 'hg19', '0.331000', '0.702000', '0.371000'] },
+      MC1R: { rs1805007: ['chr16:89986117', 'hg19', '0.112000', '0.761000', '0.649000'], rs12913832: ['chr15:28365618', 'hg19', '0.078125', '0.909091', '0.830966'], rs1800407: ['chr15:28000000', 'hg19', '0.204000', '0.612000', '0.408000'], rs12896399: ['chr14:92773663', 'hg19', '0.331000', '0.702000', '0.371000'] },
+      OCA2: { rs1800407: ['chr15:28000000', 'hg19', '0.204000', '0.612000', '0.408000'], rs12913832: ['chr15:28365618', 'hg19', '0.078125', '0.909091', '0.830966'], rs1805007: ['chr16:89986117', 'hg19', '0.112000', '0.761000', '0.649000'], rs12896399: ['chr14:92773663', 'hg19', '0.331000', '0.702000', '0.371000'] },
+      SLC24A4: { rs12896399: ['chr14:92773663', 'hg19', '0.331000', '0.702000', '0.371000'], rs12913832: ['chr15:28365618', 'hg19', '0.078125', '0.909091', '0.830966'], rs1805007: ['chr16:89986117', 'hg19', '0.112000', '0.761000', '0.649000'], rs1800407: ['chr15:28000000', 'hg19', '0.204000', '0.612000', '0.408000'] }
+    };
+    const defaults = { geneOne: 'HERC2', snpOne: 'rs12913832', geneTwo: 'MC1R', snpTwo: 'rs1805007' };
+    const get = id => document.getElementById(id);
+    function renderVariant(geneId, snpId, label) {
+      const gene = get(geneId).value;
+      const snp = get(snpId).value;
+      const values = variantData[gene][snp];
+      return `<article class="result-card"><span class="tag">${label}</span><h3>${snp}</h3><div class="location">${gene} • ${values[0]} • ${values[1]}</div><div class="result-metrics"><div><strong>${values[2]}</strong><span>Population 1 AF</span></div><div><strong>${values[3]}</strong><span>Population 2 AF</span></div><div><strong>${values[4]}</strong><span>FST</span></div></div></article>`;
+    }
+    function renderResults() { get('resultGrid').innerHTML = renderVariant('geneOne', 'snpOne', 'Variant 1') + renderVariant('geneTwo', 'snpTwo', 'Variant 2'); }
+    function reset() { Object.entries(defaults).forEach(([id, value]) => get(id).value = value); renderResults(); }
+    ['geneOne','snpOne','geneTwo','snpTwo'].forEach(id => get(id).addEventListener('change', renderResults));
+    get('runCompare').addEventListener('click', renderResults);
+    get('resetCompare').addEventListener('click', reset);
+    renderResults();
+  </script>
+</body>
+</html>
