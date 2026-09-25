@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>meFST | Analyses</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="comparison.css">
 </head>
 <body data-page="analyses">
   <header class="topbar">
@@ -27,10 +28,50 @@
   <main class="container">
     <section class="page-title">
       <h1>Analyses</h1>
-      <p>Mock analysis results using selected filters and dataset records.</p>
+      <p>Compare the same gene and variant across population groups and geographic reference locations.</p>
     </section>
 
-    <section class="grid grid-3" style="margin-bottom:24px">
+    <section class="comparison-card card card-pad" aria-labelledby="comparisonTitle">
+      <div class="comparison-heading">
+        <div>
+          <span class="tag">Population comparison prototype</span>
+          <h2 id="comparisonTitle">HERC2 / rs12913832</h2>
+          <p class="muted">Allele-frequency comparison for the supplied 1000 Genomes population rows. Select a population pair or sort by FST and Delta.</p>
+        </div>
+        <button id="resetComparison" class="btn btn-outline" type="button">Reset filters</button>
+      </div>
+
+      <div class="comparison-summary" id="comparisonSummary"></div>
+
+      <div class="comparison-filters">
+        <label>Population 1
+          <select id="comparisonPop1"><option value="">All populations</option></select>
+        </label>
+        <label>Population 2
+          <select id="comparisonPop2"><option value="">All populations</option></select>
+        </label>
+        <label>Sort by
+          <select id="comparisonSort">
+            <option value="original">Input order</option>
+            <option value="fst">Highest FST</option>
+            <option value="delta">Highest Delta</option>
+            <option value="frequency">Largest AF gap</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="comparison-table-wrap">
+        <table class="table comparison-table">
+          <thead>
+            <tr><th>Population 1</th><th>Population 2</th><th>Location reference</th><th>AF 1</th><th>AF 2</th><th>FST</th><th>Delta</th></tr>
+          </thead>
+          <tbody id="comparisonTableBody"></tbody>
+        </table>
+      </div>
+      <p class="comparison-note">AF = allele frequency. FST and Delta are displayed exactly as supplied. Population codes are reference groups, not a claim that every individual in a city has the same frequency.</p>
+    </section>
+
+    <section class="grid grid-3" style="margin:24px 0">
       <div class="card feature-card"><div class="feature-icon">PCA</div><h3>Population PCA</h3><p>Visualize population structure with selected SNP markers.</p><br><button class="btn btn-dark" onclick="showToast('Mock PCA analysis started')">Run PCA</button></div>
       <div class="card feature-card"><div class="feature-icon">DNA</div><h3>Admixture Summary</h3><p>Summarize mock population grouping and ancestry components.</p><br><button class="btn btn-dark" onclick="showToast('Mock admixture analysis started')">Run Admixture</button></div>
       <div class="card feature-card"><div class="feature-icon">MAP</div><h3>Regional Heatmap</h3><p>Preview marker or methylation patterns by region.</p><br><button class="btn btn-dark" onclick="showToast('Mock heatmap created')">Create Heatmap</button></div>
@@ -38,9 +79,7 @@
 
     <section class="card table-wrap">
       <table class="table">
-        <thead>
-          <tr><th>Analysis</th><th>User</th><th>Filters</th><th>Status</th><th>Created</th><th>Actions</th></tr>
-        </thead>
+        <thead><tr><th>Analysis</th><th>User</th><th>Filters</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead>
         <tbody id="analysisTableBody"></tbody>
       </table>
     </section>
@@ -49,5 +88,6 @@
   <footer class="footer">meFST mock UI demo • No real analysis is performed</footer>
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script src="population-comparison.js"></script>
 </body>
 </html>
